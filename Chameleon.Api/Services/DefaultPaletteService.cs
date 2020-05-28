@@ -1,4 +1,5 @@
 ﻿using System.Collections.Generic;
+using System.Drawing;
 using System.Linq;
 using System.Threading.Tasks;
 
@@ -8,29 +9,22 @@ namespace Chameleon.Api.Services
     {
         public Task<IEnumerable<PaletteOption>> GetTargetPalette()
         {
-            var palette = new[]
+            var colours = new[]
             {
-                new PaletteOption
-                {
-                    Key = "Teal",
-                    RGB =  new RGBPixel{
-
-                    Red = 123,
-                    Green = 123,
-                    Blue = 123
-                    }
-                },
-                new PaletteOption
-                {
-                    Key = "Grey",
-                    RGB =  new RGBPixel{
-
-                    Red = 0,
-                    Green = 0,
-                    Blue = 0
-                    }
-                },
+                Color.White,
+                Color.Gray,
+                Color.Black,
+                Color.Red,
+                Color.Green,
+                Color.Blue,
+                Color.Yellow,
+                Color.Teal,
+                Color.Orange,
+                Color.Purple,
+                Color.Pink
             };
+
+            var palette = colours.Select(c => PaletteOption.FromColor(c));
 
             return Task.FromResult(palette.AsEnumerable());
         }

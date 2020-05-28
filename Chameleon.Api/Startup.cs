@@ -4,6 +4,7 @@ using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
+using Microsoft.OpenApi.Models;
 
 namespace Chameleon.Api
 {
@@ -25,6 +26,11 @@ namespace Chameleon.Api
             services.AddScoped<IColourMatcher>(_ => new KMeansColourMatcher());
             services.AddScoped<IColourMatchService, ColourMatchService>();
             services.AddScoped<IPaletteService, DefaultPaletteService>();
+
+            services.AddSwaggerGen(c =>
+            {
+                c.SwaggerDoc("v1", new OpenApiInfo { Title = "Chameleon Api", Version = "v1" });
+            });
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -34,6 +40,12 @@ namespace Chameleon.Api
             {
                 app.UseDeveloperExceptionPage();
             }
+
+            app.UseSwagger();
+            app.UseSwaggerUI(c =>
+            {
+                c.SwaggerEndpoint("/swagger/v1/swagger.json", "Chameleon Api");
+            });
 
             app.UseRouting();
 

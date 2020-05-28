@@ -22,16 +22,7 @@ namespace Chameleon.Tests
 
         private static IEnumerable<PaletteOption> GetTestPaletteOptions(params Color[] colours)
         {
-            return colours.Select(c => new PaletteOption
-            {
-                Key = c.Name,
-                RGB = new RGBPixel
-                {
-                    Blue = c.B,
-                    Green = c.G,
-                    Red = c.R
-                }
-            });
+            return colours.Select(c => PaletteOption.FromColor(c));
         }
 
         [TestMethod]
