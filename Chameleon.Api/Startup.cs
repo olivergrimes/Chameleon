@@ -22,7 +22,7 @@ namespace Chameleon.Api
             services.AddControllers();
             services.AddHttpClient();
 
-            services.AddScoped<IColourMatcher, KMeansColourMatcher>();
+            services.AddScoped<IColourMatcher>(_ => new KMeansColourMatcher());
             services.AddScoped<IColourMatchService, ColourMatchService>();
             services.AddScoped<IPaletteService, DefaultPaletteService>();
         }

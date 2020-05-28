@@ -25,13 +25,12 @@ namespace Chameleon
 
             using var imageBytes = await httpClient.GetStreamAsync(uri);
             using var bitmap = new Bitmap(imageBytes);
+            using var shrunkBitmap = ImageResizer.MaintainRatio(bitmap, newHeight: MaxImageHeight);
 
-            using var shrunkbitmap = ImageResizer.MaintainRatio(bitmap, newHeight: MaxImageHeight);
-            var rgbPixels = BitmapConverter.GetRGBPixels(shrunkbitmap);
+            var rgbPixels = BitmapConverter.GetRGBPixels(shrunkBitmap);
+            var match = _colourMatcher.GetClosestMatch(rgbPixels, palette);
 
-            var result =  _colourMatcher.GetClosestMatch(rgbPixels, palette);
-
-            return result;
+            return match;
         }
     }
 }
