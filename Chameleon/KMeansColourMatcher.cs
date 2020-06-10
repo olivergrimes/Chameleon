@@ -67,11 +67,6 @@ namespace Chameleon
                 .OrderBy(p => p.Distance)
                 .FirstOrDefault();
 
-            if (topMatch == null)
-            {
-                return null;
-            }
-
             return topMatch;
         }
 
