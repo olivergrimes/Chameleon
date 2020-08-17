@@ -13,7 +13,7 @@ namespace Chameleon
                 return new RGBPixel[0];
             }
 
-            var pixels = new List<RGBPixel>();
+            var pixels = new List<RGBPixel>(); 
 
             /* Iterating the pixels was slow. Found an unsafe 
              * method using a single lock from: https://stackoverflow.com/a/3795278/490282.
